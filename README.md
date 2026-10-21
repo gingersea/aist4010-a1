@@ -66,16 +66,9 @@ python train/train_mutual.py --epochs 80 --batch 64
 python ensemble_final.py --data <数据目录> --out submission_final.csv
 ```
 
-### GPU 环境注意事项
+### 显存注意事项
 
-服务器驱动 595.84/595.99 版本错配导致 NVML 崩溃, 训练前需设置:
-
-```bash
-export CUDA_VISIBLE_DEVICES=0
-export PYTORCH_NVML_BASED_CUDA_CALL=0
-```
-
-64px 训练 batch≤64; 128px 训练 batch=16 + 梯度累积 4 步 (显存峰值 < 2GB)。
+128px 训练使用 batch=16 + 梯度累积 4 步(等效 batch=64), 以控制显存占用。
 
 ### 依赖
 
